@@ -1,19 +1,23 @@
 package com.sparta.sortmanager;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MergeSort implements Sorter{
-    public void sort(int[] arr) {
-
+public class MergeSort implements Sortable {
+    public int[] sort(int[] arr) {
+        arr = mergeSort(arr);
+        return arr;
     }
 
     private int[] mergeSort(int[] arr) {
+        if (arr.length <= 1) {
+            return arr;
+        }
+
         int middle = arr.length / 2;
 
         // populate left and right
-        int[] left = Arrays.copyOfRange(arr, 0, middle-1);
-        int[] right = Arrays.copyOfRange(arr, middle, arr.length-1);
+        int[] left = Arrays.copyOfRange(arr, 0, middle);
+        int[] right = Arrays.copyOfRange(arr, middle, arr.length);
 
         int[] leftSorted = mergeSort(left);
         int[] rightSorted = mergeSort(right);
@@ -21,31 +25,36 @@ public class MergeSort implements Sorter{
         return merge(leftSorted, rightSorted);
     }
 
-    private Object[] merge(int[] leftArr, int[] rightArr) {
-        ArrayList<Integer> result = new ArrayList<>();
-        int i = 0; int j = 0;
+    private int[] merge(int[] leftArr, int[] rightArr) {
+        int[] result = new int[leftArr.length + rightArr.length];
+        int i = 0; int l = 0; int r = 0;
 
-        while (i < leftArr.length && j < rightArr.length) {
-            if (leftArr[i] > rightArr[j]) {
-                result.add(leftArr[i]);
-                i++;
+        // the actual merging part
+        while (l < leftArr.length && r < rightArr.length) {
+            if (leftArr[l] < rightArr[r]) {
+                result[i] = leftArr[l];
+                l++;
             } else {
-                result.add(rightArr[j]);
-                j++;
+                result[i] = rightArr[r];
+                r++;
+            }
+            i++;
+        }
+
+        // if there are leftover elements from either left/right array, add them to result array
+        if (l < leftArr.length) {
+            for (int k = l; k < leftArr.length; k++) {
+                result[i] = leftArr[k];
+                i++;
+            }
+        } else if (r < rightArr.length) {
+            for (int k = r; k < rightArr.length; k++) {
+                result[i] = rightArr[k];
+                i++;
             }
         }
 
-        if (i < leftArr.length) {
-            for (int k = i; k < leftArr.length; k++) {
-                result.add(leftArr[i]);
-            }
-        } else if (j < rightArr.length) {
-            for (int k = j; k < rightArr.length; k++) {
-                result.add(rightArr[j]);
-            }
-        }
-
-        return result.toArray();
+        return result;
     }
 }
 

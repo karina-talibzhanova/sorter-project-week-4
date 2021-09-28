@@ -1,7 +1,7 @@
 package com.sparta.sortmanager;
 
-public class BubbleSort implements Sorter{
-    public void sort(int[] arr) {
+public class BubbleSort implements Sortable {
+    public int[] sort(int[] arr) {
         int n = arr.length-1;
         int temp;
 
@@ -16,5 +16,6 @@ public class BubbleSort implements Sorter{
             }
             n--;
         }
+        return arr;
     }
 }
