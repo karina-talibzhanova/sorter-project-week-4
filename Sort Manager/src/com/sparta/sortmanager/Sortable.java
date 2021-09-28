@@ -1,5 +1,5 @@
 package com.sparta.sortmanager;
 
-public interface Sorter {
+public interface Sortable {
     void sort(int[] arr);
 }
