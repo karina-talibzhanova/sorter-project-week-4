@@ -12,14 +12,16 @@ public class SortMain {
 
         int[] unsorted = {2, 5, 2, 1, 7, 8};
 
-        System.out.println("Unsorted array: ");
-        for (int i : unsorted) {
-            System.out.print(i + " ");
-        }
+
         long start = System.nanoTime();
         int[] sorted = sorter.sort(unsorted);
         long end = System.nanoTime();
         long timeElapsed = end-start;
+
+        System.out.println("Unsorted array: ");
+        for (int i : unsorted) {
+            System.out.print(i + " ");
+        }
 
         System.out.println("\nSorted array: ");
         for (int i : sorted) {
