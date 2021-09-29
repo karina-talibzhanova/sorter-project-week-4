@@ -12,20 +12,28 @@ public class SortMain {
 
         int[] unsorted = {2, 5, 2, 1, 7, 8};
 
-        int[] sorted = sorter.sort(unsorted);
+        System.out.println("Unsorted array: ");
         for (int i : unsorted) {
             System.out.print(i + " ");
         }
-        System.out.println("");
+        long start = System.nanoTime();
+        int[] sorted = sorter.sort(unsorted);
+        long end = System.nanoTime();
+        long timeElapsed = end-start;
+
+        System.out.println("\nSorted array: ");
         for (int i : sorted) {
             System.out.print(i + " ");
         }
+        System.out.println("\nThe algorithm took " + timeElapsed + " nanoseconds.");
     }
 
     public static Sortable sortableFactory(String choice) {
         if (choice.equals("BubbleSort")) {
+            System.out.println("You have chosen BubbleSort.");
             return new BubbleSort();
         } else if (choice.equals("MergeSort")) {
+            System.out.println("You have chosen MergeSort.");
             return new MergeSort();
         } else {
             return null;  // raise an exception here
