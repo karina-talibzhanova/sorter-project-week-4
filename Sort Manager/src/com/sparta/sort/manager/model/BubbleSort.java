@@ -10,7 +10,7 @@ public class BubbleSort implements Sortable {
 
         // at each pass through, ignore the last correctly placed element
         while (n > 1) {
-            for (int i = 0; i < n-1; i++) {
+            for (int i = 0; i < n; i++) {
                 if (sortedArr[i] > sortedArr[i+1]) {
                     temp = sortedArr[i];
                     sortedArr[i] = sortedArr[i+1];
