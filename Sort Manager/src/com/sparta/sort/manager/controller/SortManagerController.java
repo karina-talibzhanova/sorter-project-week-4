@@ -4,7 +4,6 @@ import com.sparta.sort.manager.model.*;
 import com.sparta.sort.manager.view.SortManagerView;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class SortManagerController {
     private Sortable model;
@@ -34,11 +33,8 @@ public class SortManagerController {
     }
 
     public void updateView() {
-        view.printSelectionMenu();
-        Scanner scan = new Scanner(System.in);
-        String algorithmChoice = scan.next();
-        view.printArrayLengthSelection();
-        int arrayLength = scan.nextInt();
+        String algorithmChoice = view.printSelectionMenu();
+        int arrayLength = view.printArrayLengthSelection();
 
         model = sortableFactory(algorithmChoice);
         int[] unsorted = generateRandomArr(arrayLength);
