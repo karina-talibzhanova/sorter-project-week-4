@@ -28,6 +28,7 @@ public class SortManagerView {
         System.out.println("Select which sorting algorithm you would like to use:");
         System.out.println("- BubbleSort");
         System.out.println("- MergeSort");
+        System.out.println("- QuickSort");
         String choice = scan.next();
 
         return choice;

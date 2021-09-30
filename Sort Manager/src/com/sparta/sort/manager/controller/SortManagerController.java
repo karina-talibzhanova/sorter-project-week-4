@@ -14,12 +14,15 @@ public class SortManagerController {
     }
 
     public Sortable sortableFactory(String choice) {
-        if (choice.equals("BubbleSort")) {
-            return new BubbleSort();
-        } else if (choice.equals("MergeSort")) {
-            return new MergeSort();
-        } else {
-            return null;  // raise an exception here
+        switch (choice) {
+            case "BubbleSort":
+                return new BubbleSort();
+            case "MergeSort":
+                return new MergeSort();
+            case "QuickSort":
+                return new QuickSort();
+            default:
+                return null;  // raise an exception here
         }
     }
 
