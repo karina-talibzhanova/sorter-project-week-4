@@ -18,7 +18,7 @@ public class SortManagerControllerShould {
     static void setUp() {
         view = new SortManagerView();
         controller = new SortManagerController(view);
-        seed = 12345678;
+        seed = 123;
     }
 
     // test generator method with specific seed (need to find out what the values are)
@@ -33,6 +33,12 @@ public class SortManagerControllerShould {
     @Test
     public void givenFive_ReturnArrayLengthFive() {
         assertEquals(5, controller.generateRandomArr(5, seed).length);
+    }
+
+    @Test
+    public void given10_ReturnTargetArray() {
+        int[] target = {82, 50, 76, 89, 95, 57, 34, 37, 85, 53};
+        assertArrayEquals(target, controller.generateRandomArr(10, seed));
     }
 
     @Test

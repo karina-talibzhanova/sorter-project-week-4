@@ -16,6 +16,9 @@ public class SortManagerController {
     }
 
     public Sortable sortableFactory(String choice) {
+        if (choice == null) {
+            throw new IllegalArgumentException();
+        }
         switch (choice) {
             case "BubbleSort":
                 return new BubbleSort();
