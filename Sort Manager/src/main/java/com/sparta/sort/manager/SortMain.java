@@ -1,4 +1,4 @@
-package main.java.com.sparta.sort.manager;
+package com.sparta.sort.manager;
 
 import com.sparta.sort.manager.controller.SortManagerController;
 import com.sparta.sort.manager.view.SortManagerView;
