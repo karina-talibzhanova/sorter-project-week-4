@@ -1,5 +1,6 @@
 package com.sparta.sort.manager.view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SortManagerView {
@@ -36,6 +37,16 @@ public class SortManagerView {
     public int printArrayLengthSelection() {
         System.out.println("Enter the size of the array you would like to sort:");
 
-        return scan.nextInt();
+        if (scan.hasNextInt()) {
+            return scan.nextInt();
+        }
+        else {
+            scan.next();  // empty the buffer? not sure why this works
+            throw new InputMismatchException();
+        }
+    }
+
+    public void printErrorMessage() {
+        System.out.println("Your previous input was invalid. Please try again.");
     }
 }

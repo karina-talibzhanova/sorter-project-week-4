@@ -4,6 +4,7 @@ import com.sparta.sort.manager.model.*;
 import com.sparta.sort.manager.view.SortManagerView;
 
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class SortManagerController {
@@ -44,11 +45,28 @@ public class SortManagerController {
     }
 
     public void updateView() {
-        String algorithmChoice = view.printSelectionMenu();
-        int arrayLength = view.printArrayLengthSelection();
+        String algorithmChoice;
+        int[] unsorted = new int[0];
+        int arrayLength;
+        while (true) {
+            algorithmChoice = view.printSelectionMenu();
+            try {
+                model = sortableFactory(algorithmChoice);
+                break;
+            } catch (IllegalArgumentException iae) {
+                view.printErrorMessage();
+            }
+        }
 
-        model = sortableFactory(algorithmChoice);
-        int[] unsorted = generateRandomArr(arrayLength, date.getTime());
+        while (true) {
+            try {
+                arrayLength = view.printArrayLengthSelection();
+                unsorted = generateRandomArr(arrayLength, date.getTime());
+                break;
+            } catch (InputMismatchException | IllegalArgumentException e) {
+                view.printErrorMessage();
+            }
+        }
 
         long start = System.nanoTime();
         int[] sorted = model.sort(unsorted);
