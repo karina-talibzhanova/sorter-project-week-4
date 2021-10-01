@@ -3,11 +3,13 @@ package com.sparta.sort.manager.controller;
 import com.sparta.sort.manager.model.*;
 import com.sparta.sort.manager.view.SortManagerView;
 
+import java.util.Date;
 import java.util.Random;
 
 public class SortManagerController {
     private Sortable model;
     private SortManagerView view;
+    private Date date = new Date();
 
     public SortManagerController(SortManagerView view) {
         this.view = view;
@@ -22,12 +24,15 @@ public class SortManagerController {
             case "QuickSort":
                 return new QuickSort();
             default:
-                return null;  // raise an exception here
+                throw new IllegalArgumentException();  // raise an exception here
         }
     }
 
-    public int[] generateRandomArr(int length) {
-        Random rand = new Random();
+    public int[] generateRandomArr(int length, long seed){
+        if (length < 0) {
+            throw new IllegalArgumentException();
+        }
+        Random rand = new Random(seed);
         int[] arr = new int[length];
         for(int i = 0; i < length; i++) {
             arr[i] = rand.nextInt(100);
@@ -40,7 +45,7 @@ public class SortManagerController {
         int arrayLength = view.printArrayLengthSelection();
 
         model = sortableFactory(algorithmChoice);
-        int[] unsorted = generateRandomArr(arrayLength);
+        int[] unsorted = generateRandomArr(arrayLength, date.getTime());
 
         long start = System.nanoTime();
         int[] sorted = model.sort(unsorted);
