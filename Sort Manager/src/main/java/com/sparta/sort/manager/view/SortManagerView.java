@@ -29,15 +29,13 @@ public class SortManagerView {
         System.out.println("- BubbleSort");
         System.out.println("- MergeSort");
         System.out.println("- QuickSort");
-        String choice = scan.next();
 
-        return choice;
+        return scan.next();
     }
 
     public int printArrayLengthSelection() {
         System.out.println("Enter the size of the array you would like to sort:");
-        int length = scan.nextInt();
 
-        return length;
+        return scan.nextInt();
     }
 }
