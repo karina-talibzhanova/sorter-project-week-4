@@ -46,7 +46,7 @@ public class SortManagerController {
 
     public void updateView() {
         String algorithmChoice;
-        int[] unsorted = new int[0];
+        int[] unsorted;
         int arrayLength;
         while (true) {
             algorithmChoice = view.printSelectionMenu();
