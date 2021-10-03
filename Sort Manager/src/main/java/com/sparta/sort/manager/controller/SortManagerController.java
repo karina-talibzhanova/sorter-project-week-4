@@ -7,13 +7,18 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 public class SortManagerController {
     private Sortable model;
     private SortManagerView view;
     private Date date = new Date();
+    private Logger logger = Logger.getLogger("Sort Manager Logger");
 
     public SortManagerController(SortManagerView view) {
         this.view = view;
+        PropertyConfigurator.configure("Sort Manager/log4j.properties");
     }
 
     public Sortable sortableFactory(String choice) {
@@ -54,6 +59,7 @@ public class SortManagerController {
                 model = sortableFactory(algorithmChoice);
                 break;
             } catch (IllegalArgumentException iae) {
+                logger.error("User did not type in a valid algorithm");
                 view.printErrorMessage();
             }
         }
@@ -63,7 +69,11 @@ public class SortManagerController {
                 arrayLength = view.printArrayLengthSelection();
                 unsorted = generateRandomArr(arrayLength, date.getTime());
                 break;
-            } catch (InputMismatchException | IllegalArgumentException e) {
+            } catch (InputMismatchException ime) {
+                logger.error("User did not supply an integer for array length");
+                view.printErrorMessage();
+            } catch(IllegalArgumentException iae) {
+                logger.error("Array length is less than 0");
                 view.printErrorMessage();
             }
         }
